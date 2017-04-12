@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Acquaint.XForms.AcquaintanceEditPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem AutomationId="SaveButton" Text="SaveButton" Icon="save.png" Command="{Binding SaveAcquaintanceCommand}" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<ContentView x:Name="TopContentView">
+			<ContentView.Padding>
+				<OnPlatform x:TypeArguments="Thickness" WinPhone="10" />
+			</ContentView.Padding>
+			<ContentView.Content>
+				<TableView Intent="Settings" BackgroundColor="White">
+					<TableRoot>
+						<TableSection Title="Name">
+							<EntryCell AutomationId="FirstNameEntry" Label="First" Text="{Binding Acquaintance.FirstName}" Keyboard="Text" />
+							<EntryCell AutomationId="LastNameEntry" Label="Last" Text="{Binding Acquaintance.LastName}" Keyboard="Text" />
+						</TableSection>
+						<TableSection Title="Employment">
+							<EntryCell AutomationId="CompanyEntry" Label="Company" Text="{Binding Acquaintance.Company}" Keyboard="Text" />
+							<EntryCell AutomationId="TitleEntry" Label="Title" Text="{Binding Acquaintance.JobTitle}" Keyboard="Text" />
+						</TableSection>
+						<TableSection Title="Contact">
+							<EntryCell AutomationId="PhoneEntry" Label="Phone" Text="{Binding Acquaintance.Phone}" Keyboard="Telephone" />
+							<EntryCell AutomationId="EmailEntry" Label="Email" Text="{Binding Acquaintance.Email}" Keyboard="Email" />
+						</TableSection>
+						<TableSection Title="Address">
+							<EntryCell AutomationId="StreetEntry" Label="Street" Text="{Binding Acquaintance.Street}" Keyboard="Text" />
+							<EntryCell AutomationId="CityEntry" Label="City" Text="{Binding Acquaintance.City}" Keyboard="Text" />
+							<EntryCell AutomationId="StateEntry" Label="State" Text="{Binding Acquaintance.State}" Keyboard="Text" PropertyChanged="StateEntry_PropertyChanged" />
+							<EntryCell AutomationId="ZipEntry" Label="ZIP" Text="{Binding Acquaintance.PostalCode}" Keyboard="Numeric" PropertyChanged="PostalCode_PropertyChanged" />
+						</TableSection>
+					</TableRoot>
+				</TableView>
+			</ContentView.Content>
+		</ContentView>
+	</ContentPage.Content>
+</ContentPage>

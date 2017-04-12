@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Acquaint.XForms.AcquaintanceDetailPage" Title="{Binding Acquaintance.DisplayName}" xmlns:local="clr-namespace:Acquaint.XForms" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" NavigationPage.BackButtonTitle="Details">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:BooleanInverter x:Key="BooleanInverter" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem AutomationId="DeleteUserButton" Text="DeleteUserButton" Icon="delete.png" Command="{Binding DeleteAcquaintanceCommand}" />
+		<ToolbarItem AutomationId="EditUserButton" Text="EditUserButton" Icon="edit.png" Command="{Binding EditAcquaintanceCommand}" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<Grid ColumnSpacing="0" RowSpacing="0">
+			<Grid.RowDefinitions>
+			    <RowDefinition Height="5" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="25" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="25" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="18*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+			    <ColumnDefinition Width="120" />
+				<ColumnDefinition Width="25" />
+				<ColumnDefinition Width="10" />
+			    <ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<ffimageloading:CachedImage x:Name="ProfilePhoto" Grid.Row="0" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="100" HeightRequest="100" DownsampleToViewSize="true" Source="{Binding Acquaintance.PhotoUrl}" LoadingPlaceholder="placeholderProfileImage.png">
+					<ffimageloading:CachedImage.Transformations>
+						<fftransformations:CircleTransformation />
+					</ffimageloading:CachedImage.Transformations>
+			</ffimageloading:CachedImage>
+			<Label TextColor="Black" Text="{Binding Acquaintance.Company}" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="4" FontSize="14"/>
+			<Label Text="{Binding Acquaintance.JobTitle}"  Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="4" FontSize="14" TextColor="Silver" VerticalOptions="Start"/>
+			<Image AutomationId="BeginNavigationButton" Grid.Row="4" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Source="directions.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="25" IsEnabled="{Binding HasAddress}" IsVisible="{Binding HasAddress}">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding GetDirectionsCommand}" />
+				</Image.GestureRecognizers>
+			</Image>
+			<StackLayout Grid.Row="4" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="3" Spacing="0" VerticalOptions="CenterAndExpand"  IsEnabled="{Binding HasAddress}" IsVisible="{Binding HasAddress}">
+				<Label AutomationId="StreetEntry" TextColor="Black" Text="{Binding Acquaintance.Street}" FontSize="14" LineBreakMode="TailTruncation" />
+				<Label AutomationId="CityEntry" TextColor="Black" Text="{Binding Acquaintance.City}" FontSize="12" LineBreakMode="TailTruncation" />
+				<Label AutomationId="StatePostalEntry" TextColor="Black" Text="{Binding Acquaintance.StatePostal}" FontSize="12" LineBreakMode="TailTruncation" />
+			</StackLayout>
+			<Image Grid.Row="8" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" AutomationId="SendTextMessageButton" Source="message.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="25" IsEnabled="{Binding HasPhoneNumber}" IsVisible="{Binding HasPhoneNumber}">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding MessageNumberCommand}" NumberOfTapsRequired="1" />
+				</Image.GestureRecognizers>
+			</Image>
+			<Label Grid.Row="8" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="1" TextColor="Black" VerticalOptions="Center" AutomationId="PhoneNumber" Text="{Binding Acquaintance.Phone}" FontSize="14" LineBreakMode="TailTruncation" IsEnabled="{Binding HasPhoneNumber}" IsVisible="{Binding HasPhoneNumber}" />
+			<Image Grid.Row="8" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="1" Margin="10,0,0,0" HorizontalOptions="Start" AutomationId="MakePhoneCallButton" Source="phone.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="25" IsEnabled="{Binding HasPhoneNumber}" IsVisible="{Binding HasPhoneNumber}">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding DialNumberCommand}" NumberOfTapsRequired="1" />
+				</Image.GestureRecognizers>
+			</Image>
+			<Image Grid.Row="10" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" AutomationId="SendEmailButton" Source="email.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="25">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding EmailCommand}" NumberOfTapsRequired="1" />
+				</Image.GestureRecognizers>
+			</Image>
+			<Label Grid.Row="10" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="3" TextColor="Black" VerticalOptions="Center" Text="{Binding Acquaintance.Email}" FontSize="12" LineBreakMode="TailTruncation"/>
+			<ActivityIndicator Grid.Row="12" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="6" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+			<maps:Map Grid.Row="12" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="6" x:Name="AcquaintanceMap" IsVisible="false" IsEnabled="{Binding HasAddress}"/>
+		</Grid>
+
+
+
+		
+		<!--<StackLayout Spacing="0">
+			<StackLayout Orientation="Horizontal" Spacing="10" Margin="10">
+				<ffimageloading:CachedImage x:Name="ProfilePhoto" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="90" HeightRequest="90" DownsampleToViewSize="true" Source="{Binding Acquaintance.PhotoUrl}" LoadingPlaceholder="placeholderProfileImage.png">
+					<ffimageloading:CachedImage.Transformations>
+						<fftransformations:CircleTransformation />
+					</ffimageloading:CachedImage.Transformations>
+				</ffimageloading:CachedImage>
+				<StackLayout Spacing="10">
+					<StackLayout Spacing="0">
+						<Label Text="{Binding Acquaintance.Company}" />
+						<Label Text="{Binding Acquaintance.JobTitle}" FontSize="Small" TextColor="Silver" />
+					</StackLayout>
+					<ContentView IsEnabled="{Binding HasAddress}" IsVisible="{Binding HasAddress}">
+						<StackLayout Orientation="Horizontal" Spacing="10">
+							<Image AutomationId="BeginNavigationButton" Source="directions.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="20">
+								<Image.GestureRecognizers>
+									<TapGestureRecognizer Command="{Binding GetDirectionsCommand}" />
+								</Image.GestureRecognizers>
+							</Image>
+							<StackLayout Spacing="0">
+								<Label AutomationId="StreetEntry" Text="{Binding Acquaintance.Street}" FontSize="Micro" LineBreakMode="TailTruncation" />
+								<Label AutomationId="CityEntry" Text="{Binding Acquaintance.City}" FontSize="Micro" LineBreakMode="TailTruncation" />
+								<Label AutomationId="StatePostalEntry" Text="{Binding Acquaintance.StatePostal}" FontSize="Micro" LineBreakMode="TailTruncation" />
+							</StackLayout>
+						</StackLayout>
+					</ContentView>
+					<ContentView IsEnabled="{Binding HasPhoneNumber}" IsVisible="{Binding HasPhoneNumber}">
+						<StackLayout Orientation="Horizontal" Spacing="10">
+							<Image AutomationId="SendTextMessageButton" Source="message.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="20">
+								<Image.GestureRecognizers>
+									<TapGestureRecognizer Command="{Binding MessageNumberCommand}" NumberOfTapsRequired="1" />
+								</Image.GestureRecognizers>
+							</Image>
+							<Label AutomationId="PhoneNumber" Text="{Binding Acquaintance.Phone}" FontSize="Small" HeightRequest="20" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
+							<Image AutomationId="MakePhoneCallButton" Source="phone.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="20">
+								<Image.GestureRecognizers>
+									<TapGestureRecognizer Command="{Binding DialNumberCommand}" NumberOfTapsRequired="1" />
+								</Image.GestureRecognizers>
+							</Image>
+						</StackLayout>
+					</ContentView>
+					<ContentView IsEnabled="{Binding HasEmailAddress}" IsVisible="{Binding HasEmailAddress}">
+						<StackLayout Orientation="Horizontal" Spacing="10">
+							<Image AutomationId="SendEmailButton" Source="email.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="20">
+								<Image.GestureRecognizers>
+									<TapGestureRecognizer Command="{Binding EmailCommand}" NumberOfTapsRequired="1" />
+								</Image.GestureRecognizers>
+							</Image>
+							<Label Text="{Binding Acquaintance.Email}" FontSize="Micro" HeightRequest="20" LineBreakMode="TailTruncation" VerticalTextAlignment="Center" />
+						</StackLayout>
+					</ContentView>
+				</StackLayout>
+			</StackLayout>
+			<ContentView HeightRequest="1" BackgroundColor="Silver" />
+			<AbsoluteLayout VerticalOptions="FillAndExpand">
+				<ContentView Padding="50" VerticalOptions="Center" IsVisible="{Binding HasAddress, Converter={StaticResource BooleanInverter}}" IsEnabled="{Binding HasAddress, Converter={StaticResource BooleanInverter}}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0">
+					<StackLayout Spacing="20">
+						<Label Text="No map is available because this person does not have an address." VerticalTextAlignment="Center" />
+						<Label Text="Enter an address on the edit screeen to see this person's location on a map." VerticalTextAlignment="Center" />
+					</StackLayout>
+				</ContentView>
+				<AbsoluteLayout IsEnabled="{Binding HasAddress}" IsVisible="{Binding HasAddress}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0">
+					<ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.2, AutoSize" />
+					<maps:Map x:Name="AcquaintanceMap" IsVisible="false" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0" />
+				</AbsoluteLayout>
+			</AbsoluteLayout>
+		</StackLayout>-->
+	</ContentPage.Content>
+</ContentPage>

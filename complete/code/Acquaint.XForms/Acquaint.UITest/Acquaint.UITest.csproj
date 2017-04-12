@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B83404F5-17DF-416F-9A0E-F82B9B49160A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Acquaint.UITest</RootNamespace>
+    <AssemblyName>Acquaint.UITest</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.UITest">
+      <HintPath>..\..\packages\Xamarin.UITest.2.0.0\lib\Xamarin.UITest.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppInitializer.cs" />
+    <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Tests\BasicTests.cs" />
+    <Compile Include="Tests\AbstractSetup.cs" />
+    <Compile Include="Tests\AddUserTests.cs" />
+    <Compile Include="Pages\AcquaintanceListPage.cs" />
+    <Compile Include="Pages\AcquaintanceEditPage.cs" />
+    <Compile Include="Pages\AcquaintanceDetailPage.cs" />
+    <Compile Include="Pages\SettingsPage.cs" />
+    <Compile Include="enums\To.cs" />
+    <Compile Include="Pages\SetupPage.cs" />
+    <Compile Include="Tests\EditUserTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
+    <Folder Include="Tests\" />
+    <Folder Include="enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acquaint.XForms.iOS\Acquaint.XForms.iOS.csproj">
+      <Project>{38CAF316-C475-4099-9723-A4002F76FCD2}</Project>
+      <Name>Acquaint.XForms.iOS</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Acquaint.XForms.Droid\Acquaint.XForms.Droid.csproj">
+      <Project>{186E2C95-63F1-44B9-AE99-0F436E3DADFE}</Project>
+      <Name>Acquaint.XForms.Droid</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

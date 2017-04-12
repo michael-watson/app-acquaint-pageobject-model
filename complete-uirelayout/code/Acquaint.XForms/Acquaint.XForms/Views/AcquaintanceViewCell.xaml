@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell Height="60" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Acquaint.XForms.AcquaintanceViewCell">
+	<ViewCell.View>
+		<Grid ColumnSpacing="0" RowSpacing="0">
+			<Grid.RowDefinitions>
+			    <RowDefinition Height="20" />
+				<RowDefinition Height="20" />
+				<RowDefinition Height="20" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+			    <ColumnDefinition Width="80" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<ffimageloading:CachedImage x:Name="PictureImage" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50" DownsampleToViewSize="true" LoadingPlaceholder="placeholderProfileImage.png">
+				<ffimageloading:CachedImage.Transformations>
+					<fftransformations:CircleTransformation />
+				</ffimageloading:CachedImage.Transformations>
+			</ffimageloading:CachedImage>
+			<Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" x:Name="NameLabel" AutomationId="UserViewCell" HeightRequest="20" VerticalTextAlignment="End" LineBreakMode="TailTruncation"/>
+			<Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" x:Name="CompanyLabel" HeightRequest="20" VerticalTextAlignment="End" FontSize="10" LineBreakMode="TailTruncation"/>
+			<Label Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" x:Name="TitleLabel" HeightRequest="20" VerticalTextAlignment="Start" FontSize="10" LineBreakMode="TailTruncation" TextColor="Silver" />
+		</Grid>
+		
+		<!--<StackLayout Orientation="Horizontal" Spacing="0" Margin="10,0">
+			<ffimageloading:CachedImage Margin="3" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50" DownsampleToViewSize="true" Source="{Binding SmallPhotoUrl}" LoadingPlaceholder="placeholderProfileImage.png">
+				<ffimageloading:CachedImage.Transformations>
+					<fftransformations:CircleTransformation />
+				</ffimageloading:CachedImage.Transformations>
+			</ffimageloading:CachedImage>
+			<StackLayout Spacing="0" Margin="10,0,0,0">
+				<Label Text="{Binding DisplayLastNameFirst}" HeightRequest="20" VerticalTextAlignment="End" LineBreakMode="TailTruncation" />
+				<Label Text="{Binding Company}" HeightRequest="20" VerticalTextAlignment="End" FontSize="Micro" LineBreakMode="TailTruncation" />
+				<Label Text="{Binding JobTitle}" HeightRequest="20" VerticalTextAlignment="Start" FontSize="Micro" LineBreakMode="TailTruncation" TextColor="Silver" />
+			</StackLayout>
+		</StackLayout>-->
+	</ViewCell.View>
+</ViewCell>
